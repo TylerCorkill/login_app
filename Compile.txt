@@ -1,1 +1,0 @@
-g++ src/main/Main.cpp src/minor/Cmds.cpp src/minor/Error.cpp src/minor/Help.cpp src/minor/Start.cpp src/minor/Stop.cpp src/splash/CmdLine.cpp src/splash/Login.cpp src/splash/NewUser.cpp -o main.exe
