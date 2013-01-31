@@ -76,6 +76,11 @@ int cmd_line()
              << endl;
         return caller = 2;//Calls cmd_line()
     }
+    else if (cmd == "quit")
+    {
+        cout << "\n> Exiting program...\n";
+        return caller = 0;//Breaks loop
+    }
     //  else if (cmd == "reddit")
     //{
     //       string sub;
@@ -90,11 +95,6 @@ int cmd_line()
             cin >> command;
             system(command.c_str());
             return caller = 2;//Calls cmd_line()
-        }
-        else if (cmd == "break")
-        {
-            cout << "\n> Breaking...\n";
-            return caller = 0;//Breaks loop
         }
         else if (cmd == "wipe-ulib")
         {
@@ -121,13 +121,6 @@ int cmd_line()
                  << "'s user-type changed to admin"
                  << endl;
             return caller = 2;//Calls cmd_line()
-        }
-        else if (cmd == "HS")
-        //else if (cmd.substr(0,2) == "HS")
-        {
-            //cout << "\n> Entering haskell test...\n"
-            //     << endl;
-            return caller = 4;//Calls haskell()
         }
         else
         {

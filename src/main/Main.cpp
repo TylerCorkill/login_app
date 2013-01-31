@@ -11,43 +11,30 @@ int caller = 1;				// Variable for switch(caller) in main()
 int login();
 int cmd_line();
 int new_user();
-int haskell(int argc, char *argv[]);
 
-char hold()
-{
-    char hold;
-    cin >> hold;
-    return hold;
-}
-
-int main(int argc, char *argv[])
+int main()
 {
     switch (caller)
     {
         case 1:               //Calls login()
             caller = 1;
             login();
-            main(argc, argv);
+            main();
             break;
         case 2:               //Calls cmd_line()
             caller = 1;
             cmd_line();
-            main(argc, argv);
+            main();
             break;
         case 3:               //Calls new_user()
             caller = 1;
             new_user();
-            main(argc, argv);
-            break;
-        case 4:               //Calls haskell()
-            caller = 1;
-            haskell(argc, argv);
-            main(argc, argv);
+            main();
             break;
         default:              //Breaks
             return 0;
             break;
     }
-    if (hold() == 'r') main(argc, argv);
+    //char hold; cin >> hold; if (hold == 'r') main();
     return 0;
 }
