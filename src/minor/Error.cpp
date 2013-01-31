@@ -13,7 +13,7 @@ string error(string error)
 	string badLogin = 		"\n----------------------\nError: Incorrect login\n----------------------\n";
 	string emptyUser = 		"\n-------------------------\nError: Must type username\n-------------------------\n";
 	string prgmUnknown = 	"\n----------------------\nError: Unknown Program\n----------------------\n";
-	string cmdUnknown = 	"\n----------------------\nError: Unknown Command\n----------------------\n";
+	string cmdUnknown = 	"\n----------------------------------------------------------\nError: Unknown Command, type 'help' for a list of commands\n----------------------------------------------------------\n";
 
 	string errorErr = 		"\n-----------------\nError: in error()\n-----------------\n";
 

@@ -14,6 +14,7 @@ extern bool admin;      // Admin value
 
 string error(string error);
 
+int help();
 int start(string prgm);
 int stop(string sPrgm);
 int add(int i1, int i2);
@@ -31,9 +32,7 @@ int cmd_line()
     cin >> cmd;
     if (cmd == "help")
     {
-        cout << "========\n"
-             << "Commands\n"
-             << "--------\n";
+        help();
         return caller = 2;//Calls cmd_line()
     }
     else if (cmd == "logout")
