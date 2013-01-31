@@ -11,11 +11,10 @@ But what's included is as follows:
 * User login, requireing password verification
 * Ability to create a new user without logging in
 * External account library, so accounts aren't deleted upon quitting the program
-* Usertypes, only normal and admin for now
+* Usertypes, only basic and admin for now
 * Account info hashing for the account library
 * Unique usertype hashing, avoiding a specific "admin" hash that the library could be searched for
-* A limited command line, mostly used to check functionality of program additions (command list below)
-Current abilities are as follows:
+* A limited command line, mostly used to check functionality of program additions. Current abilities are as follows:
   * User logout (obviously)
   * Start/Stop programs (only Minecraft at the moment)
   * Admin-only commands, as follows:
@@ -25,10 +24,7 @@ Current abilities are as follows:
 * And ofcourse a system for displaying errors
 
 ### Default Admin
-Username: admin
-Password: pass
-
-### Commands and Syntax
+Username/Password: admin/pass
 
 
 ## Compiling
