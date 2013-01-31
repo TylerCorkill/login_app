@@ -39,5 +39,5 @@ but want it, it can be downloaded [**here**](http://sourceforge.net/projects/min
 ### Using gcc
 Since I use the gcc I'll provide an easy mode, just enter this command from the program directory:
 
-   g++ src/main/Main.cpp src/minor/Cmds.cpp src/minor/Error.cpp src/minor/Start.cpp src/minor/Stop.cpp src/splash/CmdLine.cpp src/splash/Login.cpp src/splash/NewUser.cpp -o main.exe
+    g++ src/main/Main.cpp src/minor/Cmds.cpp src/minor/Error.cpp src/minor/Start.cpp src/minor/Stop.cpp src/splash/CmdLine.cpp src/splash/Login.cpp src/splash/NewUser.cpp -o main.exe
 
