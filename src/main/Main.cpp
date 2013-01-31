@@ -1,8 +1,9 @@
-#include <iostream>
-#include <vector>
-#include <fstream>
-#include <string>
-#include <sstream>
+//#include <iostream>
+//#include <vector>
+//#include <fstream>
+//#include <string>
+//#include <sstream>
+//#include <stdlib.h>
 
 using namespace std;
 
@@ -35,6 +36,5 @@ int main()
             return 0;
             break;
     }
-    //char hold; cin >> hold; if (hold == 'r') main();
     return 0;
 }

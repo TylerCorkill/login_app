@@ -1,8 +1,5 @@
 #include <iostream>
-#include <vector>
-#include <fstream>
 #include <string>
-#include <sstream>
 
 using namespace std;
 
@@ -10,7 +7,8 @@ extern string user;     // Username input string
 extern string pass;     // Password input string
 extern string chkPass;  // Password check string
 extern int caller;      // Variable for switch(caller) in main()
-extern bool nameTaken;  // Holds true if username is taken
+
+extern bool nameTaken;         // Holds true if username is taken
 
 string error(string error);
 
@@ -33,7 +31,7 @@ int new_user()
     }
     else if (nameTaken)
     {
-        error("userExists");
+        cerr << error("userExists");
         return caller = 3;//Calls new_user()
     }
     else
@@ -46,7 +44,7 @@ int new_user()
         cin >> chkPass;
         if (pass != chkPass)
         {
-            error("passMismatch");
+            cerr << error("passMismatch");
             return caller = 3;//Calls new_user()
         }
         else

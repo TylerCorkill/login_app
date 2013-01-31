@@ -1,8 +1,5 @@
 #include <iostream>
-#include <vector>
-#include <fstream>
 #include <string>
-#include <sstream>
 #include <stdlib.h>
 
 using namespace std;
@@ -17,5 +14,5 @@ int stop(string sPrgm)
 			 << endl;
 		system("taskkill /IM javaw.exe /FI \"WINDOWTITLE eq Minecraft\"");
 	}
-	else error("prgmUnknown");
+	else cerr << error("prgmUnknown");
 }

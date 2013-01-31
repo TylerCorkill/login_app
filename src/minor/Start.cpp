@@ -1,8 +1,5 @@
 #include <iostream>
-#include <vector>
-#include <fstream>
 #include <string>
-#include <sstream>
 #include <stdlib.h>
 
 using namespace std;
@@ -26,5 +23,5 @@ int start(string prgm)
         	   mineLogin += mPass;
     	system(mineLogin.c_str());
 	}
-	else error("prgmUnknown");
+	else cerr << error("prgmUnknown");
 }

@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 #include <fstream>
 #include <string>
 #include <sstream>
@@ -13,8 +12,7 @@ string chkUser;			// Username check string
 string chkPass;			// Password check string
 string chkType;			// User type check string
 string holdHash;		// Hash holder
-
-bool nameTaken;  // 
+bool nameTaken;         // Holds true if username is taken
 
 int add(int i1, int i2)
 {
@@ -42,7 +40,7 @@ unsigned int make_hash(string hashIn)
     holdHash = hashOut.str();
 }
 
-int create_user()
+int create_user()                                   //Creates basic user
 {
     ofstream userLib;
     userLib.open("lib/ulib", fstream::app);
@@ -52,74 +50,20 @@ int create_user()
     make_hash(pass);
     userLib << holdHash
             << "!";
-    make_hash(holdHash.substr(0, 3));//Normal password hash section
+    make_hash(holdHash.substr(1, 3));//Basic password hash section
     userLib << holdHash
             << "\n";
     userLib.close();
 }
 
-int make_basic(string newBasic)
+int make(string userNew, int type)                  //Makes user specified type; 1, 2, or 3
 {
     fstream userLib;
     userLib.open("lib/ulib");
     string holdUser;
     int colon;
     int exPoint;
-    make_hash(newBasic);
-    while (userLib >> holdUser)
-    {
-        int inputLoc = userLib.tellg();
-        //cout << "\n" << inputLoc << "\n";
-        colon = holdUser.find(':');
-        exPoint = holdUser.find('!');
-        chkUser = holdUser.substr(0, colon);
-        chkPass = holdUser.substr(colon + 1, exPoint - (colon + 1));
-        chkType = holdUser.substr(exPoint + 1, holdUser.length() - (exPoint + 1));
-        if (holdHash == chkUser)
-        {
-            make_hash(chkPass.substr(0, 3));//Basic password hash section
-            userLib.seekp(inputLoc - (holdUser.length() - exPoint));
-            userLib << holdHash;
-        }
-    }
-    userLib.close();
-}
-
-int make_power(string newPower)
-{
-    fstream userLib;
-    userLib.open("lib/ulib");
-    string holdUser;
-    int colon;
-    int exPoint;
-    make_hash(newPower);
-    while (userLib >> holdUser)
-    {
-        int inputLoc = userLib.tellg();
-        //cout << "\n" << inputLoc << "\n";
-        colon = holdUser.find(':');
-        exPoint = holdUser.find('!');
-        chkUser = holdUser.substr(0, colon);
-        chkPass = holdUser.substr(colon + 1, exPoint - (colon + 1));
-        chkType = holdUser.substr(exPoint + 1, holdUser.length() - (exPoint + 1));
-        if (holdHash == chkUser)
-        {
-            make_hash(chkPass.substr(1, 3));//Power password hash section
-            userLib.seekp(inputLoc - (holdUser.length() - exPoint));
-            userLib << holdHash;
-        }
-    }
-    userLib.close();
-}
-
-int make_admin(string newAdmin)
-{
-    fstream userLib;
-    userLib.open("lib/ulib");
-    string holdUser;
-    int colon;
-    int exPoint;
-    make_hash(newAdmin);
+    make_hash(userNew);
     while (userLib >> holdUser)
     {
     	int inputLoc = userLib.tellg();
@@ -131,7 +75,7 @@ int make_admin(string newAdmin)
         chkType = holdUser.substr(exPoint + 1, holdUser.length() - (exPoint + 1));
         if (holdHash == chkUser)
         {
-            make_hash(chkPass.substr(3, 3));//Admin password hash section
+            make_hash(chkPass.substr(type, 3));//Password hash section
             userLib.seekp(inputLoc - (holdUser.length() - exPoint));
             userLib << holdHash;
         }
@@ -161,15 +105,15 @@ int check_login()
             make_hash(pass);
             if (holdHash == chkPass)
             {
-                make_hash(chkPass.substr(0, 3));//Basic password hash section
+                make_hash(chkPass.substr(1, 3));            //Basic password hash section
                 if (holdHash == chkType) return 1;
                 else
                 {
-                    make_hash(chkPass.substr(1, 3));//Power password hash section
+                    make_hash(chkPass.substr(2, 3));        //Power password hash section
                     if (holdHash == chkType) return 2;
                     else
                     {
-                        make_hash(chkPass.substr(3, 3));//Admin password hash section
+                        make_hash(chkPass.substr(3, 3));    //Admin password hash section
                         if (holdHash == chkType) return 3;
                         else return 0;
                     }

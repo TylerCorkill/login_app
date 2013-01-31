@@ -1,8 +1,5 @@
 #include <iostream>
-#include <vector>
-#include <fstream>
 #include <string>
-#include <sstream>
 #include <stdlib.h>
 
 using namespace std;
@@ -21,9 +18,7 @@ int start(string prgm);
 int stop(string sPrgm);
 int add(int i1, int i2);
 int wipe_ulib();
-int make_basic(string newBasic);
-int make_power(string newPower);
-int make_admin(string newAdmin);
+int make(string userNew, int type);
 int minecraft(string mUser, string mPass);
 
 //string cmd;
@@ -41,14 +36,14 @@ int cmd_line()
     }
     else if (cmd == "logout")
     {
-        cout << "\n> Logging out...\n"
+        cout << "\n> Logging out..."
              << endl;
         basic = false;
         power = false;
         admin = false;
-        cout << "> "
+        cout << "\n> "
              << user
-             << " logged out\n"
+             << " logged out"
              << endl;
         return caller = 1;//Calls login()
     }
@@ -98,32 +93,32 @@ int cmd_line()
             }
             else if (cmd == "basic")
             {
-                string newType;
-                cin >> newType;
+                string userType;
+                cin >> userType;
                 //cout << user;
                 cout << "\n> Changing "
-                     << newType
+                     << userType
                      << "'s user-type..."
                      << endl;
-                make_basic(newType);
+                make(userType, 1);// 1 coresponds to basic
                 cout << "\n> "
-                     << newType
+                     << userType
                      << "'s user-type changed to basic"
                      << endl;
                 return caller = 2;//Calls cmd_line()
             }
             else if (cmd == "power")
             {
-                string newType;
-                cin >> newType;
+                string userType;
+                cin >> userType;
                 //cout << user;
                 cout << "\n> Changing "
-                     << newType
+                     << userType
                      << "'s user-type..."
                      << endl;
-                make_power(newType);
+                make(userType, 2);// 2 coresponds to power
                 cout << "\n> "
-                     << newType
+                     << userType
                      << "'s user-type changed to basic"
                      << endl;
                 return caller = 2;//Calls cmd_line()
@@ -142,41 +137,41 @@ int cmd_line()
                 }
                 else if (cmd == "admin")
                 {
-                    string newType;
-                    cin >> newType;
+                    string userType;
+                    cin >> userType;
                     //cout << user;
                     cout << "\n> Changing "
-                         << newType
+                         << userType
                          << "'s user-type..."
                          << endl;
-                    make_admin(newType);
+                    make(userType, 3);// 3 coresponds to admin
                     cout << "\n> "
-                         << newType
+                         << userType
                          << "'s user-type changed to admin"
                          << endl;
                     return caller = 2;//Calls cmd_line()
                 }
                 else
                 {
-                    error("cmdUnknown");
+                    cerr << error("cmdUnknown");
                     return caller = 2;//Calls cmd_line()
                 }
             }
             else
             {
-                error("cmdUnknown");
+                cerr << error("cmdUnknown");
                 return caller = 2;//Calls cmd_line()
             }
         }
         else
         {
-            error("cmdUnknown");
+            cerr << error("cmdUnknown");
             return caller = 2;//Calls cmd_line()
         }
     }
     else
     {
-        error("cmdUnknown");
+        cerr << error("cmdUnknown");
         return caller = 2;//Calls cmd_line()
     }
 }
