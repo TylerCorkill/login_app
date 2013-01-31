@@ -10,6 +10,7 @@ extern string user;     // Username input string
 extern string pass;     // Password input string
 extern string chkPass;  // Password check string
 extern int caller;      // Variable for switch(caller) in main()
+extern bool nameTaken;  // Holds true if username is taken
 
 string error(string error);
 
@@ -21,7 +22,8 @@ int new_user()
     cout << "\n\n> Type 'cancel' to return to login\n"
          << endl
          << "Enter desired username: ";
-    getline (cin, user);
+    cin >> user;
+    check_login();
     if (user == "cancel")
     {
         cout << '\n'
@@ -29,7 +31,7 @@ int new_user()
              << endl;
         return caller = 1;//Calls login()
     }
-    else if (check_login() == 1 || 2)
+    else if (nameTaken)
     {
         error("userExists");
         return caller = 3;//Calls new_user()
@@ -38,10 +40,10 @@ int new_user()
     {
         cout << endl
              << "Enter desired password: ";
-        getline (cin, pass);
+        cin >> pass;
         cout << endl
              << "Confirm desired password: ";
-        getline (cin, chkPass);
+        cin >> chkPass;
         if (pass != chkPass)
         {
             error("passMismatch");
@@ -51,12 +53,12 @@ int new_user()
         {
             cout << "\n> Creating user "
                  << user
-                 << "\n"
+                 << "..."
                  << endl;
             create_user();
             cout << "\n> User "
                  << user
-                 << " created!\n"
+                 << " created!"
                  << endl;
             return caller = 1;//Calls login()
         }

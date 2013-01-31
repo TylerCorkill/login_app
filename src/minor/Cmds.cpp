@@ -14,6 +14,8 @@ string chkPass;			// Password check string
 string chkType;			// User type check string
 string holdHash;		// Hash holder
 
+bool nameTaken;  // 
+
 int add(int i1, int i2)
 {
     return i1 + i2;
@@ -56,14 +58,68 @@ int create_user()
     userLib.close();
 }
 
-int make_admin(string userIn)
+int make_basic(string newBasic)
 {
     fstream userLib;
     userLib.open("lib/ulib");
     string holdUser;
     int colon;
     int exPoint;
-    make_hash(userIn);
+    make_hash(newBasic);
+    while (userLib >> holdUser)
+    {
+        int inputLoc = userLib.tellg();
+        //cout << "\n" << inputLoc << "\n";
+        colon = holdUser.find(':');
+        exPoint = holdUser.find('!');
+        chkUser = holdUser.substr(0, colon);
+        chkPass = holdUser.substr(colon + 1, exPoint - (colon + 1));
+        chkType = holdUser.substr(exPoint + 1, holdUser.length() - (exPoint + 1));
+        if (holdHash == chkUser)
+        {
+            make_hash(chkPass.substr(0, 3));//Basic password hash section
+            userLib.seekp(inputLoc - (holdUser.length() - exPoint));
+            userLib << holdHash;
+        }
+    }
+    userLib.close();
+}
+
+int make_power(string newPower)
+{
+    fstream userLib;
+    userLib.open("lib/ulib");
+    string holdUser;
+    int colon;
+    int exPoint;
+    make_hash(newPower);
+    while (userLib >> holdUser)
+    {
+        int inputLoc = userLib.tellg();
+        //cout << "\n" << inputLoc << "\n";
+        colon = holdUser.find(':');
+        exPoint = holdUser.find('!');
+        chkUser = holdUser.substr(0, colon);
+        chkPass = holdUser.substr(colon + 1, exPoint - (colon + 1));
+        chkType = holdUser.substr(exPoint + 1, holdUser.length() - (exPoint + 1));
+        if (holdHash == chkUser)
+        {
+            make_hash(chkPass.substr(1, 3));//Power password hash section
+            userLib.seekp(inputLoc - (holdUser.length() - exPoint));
+            userLib << holdHash;
+        }
+    }
+    userLib.close();
+}
+
+int make_admin(string newAdmin)
+{
+    fstream userLib;
+    userLib.open("lib/ulib");
+    string holdUser;
+    int colon;
+    int exPoint;
+    make_hash(newAdmin);
     while (userLib >> holdUser)
     {
     	int inputLoc = userLib.tellg();
@@ -85,6 +141,7 @@ int make_admin(string userIn)
 
 int check_login()
 {
+    nameTaken = false;
     ifstream userLib;
     userLib.open("lib/ulib"); 
     string holdUser;
@@ -100,21 +157,26 @@ int check_login()
         chkType = holdUser.substr(exPoint + 1, holdUser.length() - (exPoint + 1));
         if (holdHash == chkUser)
         {
+            nameTaken = true;
             make_hash(pass);
             if (holdHash == chkPass)
             {
-                make_hash(chkPass.substr(0, 3));//Normal password hash section
-                if (holdHash == chkType) return 0;
+                make_hash(chkPass.substr(0, 3));//Basic password hash section
+                if (holdHash == chkType) return 1;
                 else
                 {
-                    make_hash(chkPass.substr(3, 3));//Admin password hash section
+                    make_hash(chkPass.substr(1, 3));//Power password hash section
                     if (holdHash == chkType) return 2;
-                    else return 1;
+                    else
+                    {
+                        make_hash(chkPass.substr(3, 3));//Admin password hash section
+                        if (holdHash == chkType) return 3;
+                        else return 0;
+                    }
                 }
             }
-            else return 1;
-        }
-             
+            else return 0;
+        }            
         //cout << "\nholdUser: " << holdUser << '\n';
         //cout << "\nholdPass: " << holdPass << '\n';
     }

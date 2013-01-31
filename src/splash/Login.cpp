@@ -10,6 +10,8 @@ extern int caller;      // Variable for switch(caller) in main()
 
 string user;            // Username input string
 string pass;            // Password input string
+bool basic = false;     // Basic value
+bool power = false;     // Power value
 bool admin = false;     // Admin value
 
 string error(string error);
@@ -18,10 +20,10 @@ int check_login();
 
 int login()
 {
-    cout << "> Type 'new' to create new user, or enter username.\n"
+    cout << "\n> Type 'new' to create new user, or enter username."
          << endl
-         << "Username: ";
-    getline (cin, user);
+         << "\nUsername: ";
+    cin >> user;
     if (user == "new")
     {
         return caller = 3;//Calls new_user()
@@ -32,16 +34,25 @@ int login()
         if (user != "")
         {
             cout << "\nPassword: ";
-            getline (cin, pass);
-            if (check_login() == 0)//Normal user login
+            cin >> pass;
+            if (check_login() == 1)//Basic user login
             {
                 cout << '\n'
                      << "> Logged in "
                      << user
                      << endl;
+                basic = true;
                 return caller = 2;//Calls cmd_line()
             }
-            else if (check_login() == 2)
+            else if (check_login() == 2)//Power user login
+            {
+                cout << "\n> Logged in power "
+                     << user
+                     << endl;
+                power = true;
+                return caller = 2;//Calls cmd_line()
+            }
+            else if (check_login() == 3)//Admin user login
             {
                 cout << "\n> Logged in admin "
                      << user
