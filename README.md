@@ -14,8 +14,7 @@ But what's included is as follows:
 * Usertypes, only normal and admin for now
 * Account info hashing for the account library
 * Unique usertype hashing, avoiding a specific "admin" hash that the library could be searched for
-* A limited command line, mostly used to check functionality of program additions (command list below)
-Current abilities are as follows:
+* A limited command line, mostly used to check functionality of program additions. Current abilities are as follows:
   * User logout (obviously)
   * Start/Stop programs (only Minecraft at the moment)
   * Admin-only commands, as follows:
