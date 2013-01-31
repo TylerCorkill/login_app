@@ -34,7 +34,7 @@ Password: pass
 ## Compiling
 You will need a C++ compiler; I use the gcc.  If you prefer another compiler thats perfectly ok,
 it just has to compile the multiple source files into one *.exe.  And if you don't have gcc, 
-but want it, it can be downloaded [**here**](http://sourceforge.net/projects/mingw/).
+but want it, download it [**here**](http://sourceforge.net/projects/mingw/).
 
 ### Using gcc
 Since I use the gcc I'll provide an easy mode, just enter this command from the program directory:
