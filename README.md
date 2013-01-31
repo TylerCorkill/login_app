@@ -24,10 +24,7 @@ But what's included is as follows:
 * And ofcourse a system for displaying errors
 
 ### Default Admin
-Username: admin
-Password: pass
-
-### Commands and Syntax
+Username/Password: admin/pass
 
 
 ## Compiling
