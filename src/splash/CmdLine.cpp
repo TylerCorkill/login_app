@@ -22,6 +22,8 @@ int make(string userNew, int type);
 int change_pass(string uName);
 int minecraft(string mUser, string mPass);
 
+void class_test();
+
 int cmd_line()
 {
     string cmd;
@@ -129,6 +131,7 @@ int cmd_line()
                     change_pass(username);
                     return caller = 2;//Calls cmd_line()
                 }
+                else if (cmd == "class-test") class_test();
                 else if (cmd == "admin")
                 {
                     string userType;

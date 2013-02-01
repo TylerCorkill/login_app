@@ -196,18 +196,18 @@ int change_pass(string uName)
                 }
                 if (type == (1 || 2 || 3))
                 {
-                    string newPass, newPassChk;
+                    string nPass, nPassChk;
                     cout << "New Password: ";
-                    cin >> newPass;
+                    cin >> nPass;
                     cout << "Confirm Password: ";
-                    cin >> newPassChk;
-                    if (newPass == newPassChk)
+                    cin >> nPassChk;
+                    if (nPass == nPassChk)
                     {
                         cout << "\n> Changing "
                              << uName
                              << "'s password..."
                              << endl;
-                        make_hash(newPass);
+                        make_hash(nPass);
                         userLib.seekp(inputLoc - (holdUser.length() - colon));
                         userLib << holdHash;
                         make_hash(holdHash.substr(type, 3));//Password hash section

@@ -26,7 +26,7 @@ int login()
         return caller = 3;//Calls new_user()
     }
     //else if (user == "break") return caller = 0;
-    else if (user != "")
+    else
     {
         cout << "\nPassword: ";
         cin >> pass;
@@ -59,10 +59,5 @@ int login()
             cerr << error("badLogin");
             return caller = 1;//Calls login()
         }
-    }
-    else
-    {
-        cerr << error("emptyUser");
-        return caller = 1;//Calls login()
     }
 }
