@@ -19,6 +19,7 @@ int stop(string sPrgm);
 int add(int i1, int i2);
 int wipe_ulib();
 int make(string userNew, int type);
+int change_pass(string uName);
 int minecraft(string mUser, string mPass);
 
 int cmd_line()
@@ -120,6 +121,13 @@ int cmd_line()
                     cout << "\n> User library wiped\n"
                          << endl;
                     return caller = 1;//Calls login()
+                }
+                else if (cmd == "mod-pass")
+                {
+                    string username;
+                    cin >> username;
+                    change_pass(username);
+                    return caller = 2;//Calls cmd_line()
                 }
                 else if (cmd == "admin")
                 {

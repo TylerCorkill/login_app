@@ -153,3 +153,85 @@ int check_login()
     }
     userLib.close();
 }
+
+int change_pass(string uName)
+{
+    int type;
+    bool success = false;
+    bool noUserEntry = true;
+    fstream userLib;
+    userLib.open("lib/ulib");
+    string holdUser;
+    int colon;
+    int exPoint;
+    make_hash(uName);
+    while (userLib >> holdUser)
+    {
+        int inputLoc = userLib.tellg();
+        colon = holdUser.find(':');
+        exPoint = holdUser.find('!');
+        chkUser = holdUser.substr(0, colon);
+        chkPass = holdUser.substr(colon + 1, exPoint - (colon + 1));
+        chkType = holdUser.substr(exPoint + 1, holdUser.length() - (exPoint + 1));
+        if (holdHash == chkUser)
+        {
+            noUserEntry = false;
+            cout << "\nCurrent Password: ";
+            cin >> pass;
+            make_hash(pass);
+            if (holdHash == chkPass)
+            {
+                make_hash(chkPass.substr(1, 3));            //Basic password hash section
+                if (holdHash == chkType) type = 1;
+                else
+                {
+                    make_hash(chkPass.substr(2, 3));        //Power password hash section
+                    if (holdHash == chkType) type = 2;
+                    else
+                    {
+                        make_hash(chkPass.substr(3, 3));    //Admin password hash section
+                        if (holdHash == chkType) type = 3;
+                        else cerr << error("typeError");
+                    }
+                }
+                if (type == (1 || 2 || 3))
+                {
+                    string newPass, newPassChk;
+                    cout << "New Password: ";
+                    cin >> newPass;
+                    cout << "Confirm Password: ";
+                    cin >> newPassChk;
+                    if (newPass == newPassChk)
+                    {
+                        cout << "\n> Changing "
+                             << uName
+                             << "'s password..."
+                             << endl;
+                        make_hash(newPass);
+                        userLib.seekp(inputLoc - (holdUser.length() - colon));
+                        userLib << holdHash;
+                        make_hash(holdHash.substr(type, 3));//Password hash section
+                        userLib.seekp(inputLoc - (holdUser.length() - exPoint));
+                        userLib << holdHash;
+                        success = true;
+                    }
+                    else cerr << error("passMismatch");
+                }
+            }
+            else cerr << error("passMismatch");
+        }
+    }
+    if (noUserEntry) cerr << error("noUserEntry");
+    if (success)
+    {
+        cout << "\n> "
+             << uName
+             << "'s password successfully changed"
+             << endl;
+    }
+    else
+    {
+        cout << "\n> Password change incomplete"
+             << endl;
+    }
+}

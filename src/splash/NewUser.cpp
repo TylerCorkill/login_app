@@ -16,15 +16,14 @@ int create_user();
 
 int new_user()
 {
-    cout << "\n\n> Type 'cancel' to return to login\n"
+    cout << "\n> Type 'cancel' to return to login"
          << endl
-         << "Enter desired username: ";
+         << "\nEnter desired username: ";
     cin >> user;
     check_login();
     if (user == "cancel")
     {
-        cout << '\n'
-             << "> Canceling...\n"
+        cout << "\n> Canceling...\n"
              << endl;
         return caller = 1;//Calls login()
     }
