@@ -17,10 +17,11 @@ But what's included is as follows:
 * A limited command line, mostly used to check functionality of program additions. Current abilities are as follows:
   * User logout (obviously)
   * Start/Stop programs (only Minecraft at the moment)
-  * Admin-only commands, as follows:
   * Enter system commands (terminal/command prompt etc.) from inside the program
+  * Admin-only commands, as follows:
   * Wipe the account library (deletes default admin too, so still a work in progress)
   * Make a user an admin (for which an admin is needed, and wiping would destroy ALL accounts)
+  * Change user passwords
 * And ofcourse a system for displaying errors
 
 ### Default Admin
