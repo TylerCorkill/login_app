@@ -3,12 +3,11 @@
 
 using namespace std;
 
-extern string user;     // Username input string
-extern string pass;     // Password input string
-extern string chkPass;  // Password check string
-extern int caller;      // Variable for switch(caller) in main()
-
-extern bool nameTaken;         // Holds true if username is taken
+extern string user;         // Username input string
+extern string pass;         // Password input string
+extern string chkPass;      // Password check string
+extern int caller;          // Variable for switch(caller) in main()
+extern bool nameTaken;      // Holds true if username is taken
 
 string error(string error);
 

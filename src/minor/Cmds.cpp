@@ -14,6 +14,8 @@ string chkType;			// User type check string
 string holdHash;		// Hash holder
 bool nameTaken;         // Holds true if username is taken
 
+string error(string error);
+
 int add(int i1, int i2)
 {
     return i1 + i2;
@@ -58,6 +60,7 @@ int create_user()                                   //Creates basic user
 
 int make(string userNew, int type)                  //Makes user specified type; 1, 2, or 3
 {
+    bool success = false;
     fstream userLib;
     userLib.open("lib/ulib");
     string holdUser;
@@ -67,7 +70,6 @@ int make(string userNew, int type)                  //Makes user specified type;
     while (userLib >> holdUser)
     {
     	int inputLoc = userLib.tellg();
-    	//cout << "\n" << inputLoc << "\n";
         colon = holdUser.find(':');
         exPoint = holdUser.find('!');
         chkUser = holdUser.substr(0, colon);
@@ -78,9 +80,36 @@ int make(string userNew, int type)                  //Makes user specified type;
             make_hash(chkPass.substr(type, 3));//Password hash section
             userLib.seekp(inputLoc - (holdUser.length() - exPoint));
             userLib << holdHash;
+            success = true;
         }
     }
     userLib.close();
+    if (success)
+    {
+        if (type == 1)          // Basic success
+        {
+            cout << "\n> "
+                 << type
+                 << "'s user-type changed to basic"
+                 << endl;
+        }
+        else if (type == 2)     // Power success
+        {
+            cout << "\n> "
+                 << type
+                 << "'s user-type changed to basic"
+                 << endl;
+        }
+        else if (type == 3)     // Admin success
+        {
+            cout << "\n> "
+                 << type
+                 << "'s user-type changed to admin"
+                 << endl;
+        }
+        else cerr << error("typeError");
+    }
+    else cerr << error("typeChange");
 }
 
 int check_login()
@@ -121,10 +150,6 @@ int check_login()
             }
             else return 0;
         }            
-        //cout << "\nholdUser: " << holdUser << '\n';
-        //cout << "\nholdPass: " << holdPass << '\n';
     }
-    userLib.close();       
-    //if (userInput == "tyler") return true;
-    //else return false;
+    userLib.close();
 }

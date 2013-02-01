@@ -32,8 +32,7 @@ int login()
         cin >> pass;
         if (check_login() == 1)                 //Basic user login
         {
-            cout << '\n'
-                 << "> Logged in "
+            cout << "\n> Logged in "
                  << user
                  << endl;
             basic = true;
