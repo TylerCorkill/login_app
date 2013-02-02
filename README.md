@@ -3,7 +3,7 @@ Login project
 
 ## Description
 This is a beginner project I've started as a suplement to learning C++, as well as practice git use.
-Any and all are welcome to fork, although it's most likely mediocre. I only ask that all forks remain open-source.
+All are welcome to fork, although it's most likely mediocre. I only ask that all forks remain open-source.
 
 ### Program Features
 Being a beginner project, the features are of less functional value and more so added to test/teach skills/knowledge.
