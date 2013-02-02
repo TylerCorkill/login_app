@@ -1,28 +1,38 @@
 #include <iostream>
 #include <string>
+#include <sstream>
+#include <fstream>
 #include <stdlib.h>
+
+#include "include/User.h"
+//#include "include/Error.h"
 
 using namespace std;
 
-extern string user;     // Username input string
-extern string pass;     // Password input string
 extern int caller;      // Variable for switch(caller) in main()
-extern bool basic;      // Basic value
-extern bool power;      // Power value
-extern bool admin;      // Admin value
 
-string error(string error);
+//User::User(string newName, string newPass, int newType);
+//User::User();
+//extern string user;     // Username input string
+//extern string pass;     // Password input string
+//extern bool basic;      // Basic value
+//extern bool power;      // Power value
+//extern bool admin;      // Admin value
+
+extern User user;
+
+//string error(string error);
 
 int help();
 int start(string prgm);
 int stop(string sPrgm);
 int add(int i1, int i2);
 int wipe_ulib();
-int make(string userNew, int type);
-int change_pass(string uName);
+//int make(string userNew, int type);
+//int change_pass(string uName);
 int minecraft(string mUser, string mPass);
 
-void class_test();
+//void class_test();
 
 int cmd_line()
 {
@@ -38,11 +48,11 @@ int cmd_line()
     {
         cout << "\n> Logging out..."
              << endl;
-        basic = false;
-        power = false;
-        admin = false;
+        //basic = false;
+        //power = false;
+        //admin = false;
         cout << "\n> "
-             << user
+             << user.name()
              << " logged out"
              << endl;
         return caller = 1;//Calls login()
@@ -52,7 +62,7 @@ int cmd_line()
         cout << "\n> Exiting program...\n";
         return caller = 0;//Breaks
     }
-    else if (basic || power || admin)
+    else if (user.type() == 1 || 2 || 3)                // Basic, Power, and Admin
     {
         if (cmd == "start")
         {
@@ -81,7 +91,7 @@ int cmd_line()
                  << endl;
             return caller = 2;//Calls cmd_line()
         }
-        else if (power || admin)
+        else if (user.type() == 2 || 3)                 // Power and Admin
         {
             if (cmd == "sys")
             {
@@ -90,36 +100,41 @@ int cmd_line()
                 system(command.c_str());
                 return caller = 2;//Calls cmd_line()
             }
-            else if (cmd == "basic")
+            if (cmd == "basic")
             {
-                string userType;
-                cin >> userType;
+                string username;
+                cin >> username;
                 cout << "\n> Changing "
-                     << userType
+                     << username
                      << "'s user-type..."
                      << endl;
-                make(userType, 1);
+                user.hold();
+                user.new_name(username);
+                user.make(1);
+                user.release();
                 return caller = 2;//Calls cmd_line()
             }
             else if (cmd == "power")
             {
-                string userType;
-                cin >> userType;
+                string username;
+                cin >> username;
                 cout << "\n> Changing "
-                     << userType
+                     << username
                      << "'s user-type..."
                      << endl;
-                make(userType, 2);
+                user.hold();
+                user.new_name(username);
+                user.make(2);
+                user.release();
                 return caller = 2;//Calls cmd_line()
             }
-            else if (admin)
+            else if (user.type() == 3)                  // Admin only
             {
                 if (cmd == "wipe-ulib")
                 {
                     cout << "\n> Wipeing user library..."
                          << endl;
                     wipe_ulib();
-                    admin = false;
                     cout << "\n> User library wiped\n"
                          << endl;
                     return caller = 1;//Calls login()
@@ -128,19 +143,25 @@ int cmd_line()
                 {
                     string username;
                     cin >> username;
-                    change_pass(username);
+                    user.hold();
+                    user.new_name(username);
+                    user.pass_change();
+                    user.release();
                     return caller = 2;//Calls cmd_line()
                 }
-                else if (cmd == "class-test") class_test();
+                //else if (cmd == "class-test") class_test();
                 else if (cmd == "admin")
                 {
-                    string userType;
-                    cin >> userType;
+                    string username;
+                    cin >> username;
                     cout << "\n> Changing "
-                         << userType
+                         << username
                          << "'s user-type..."
                          << endl;
-                    make(userType, 3);
+                    user.hold();
+                    user.new_name(username);
+                    user.make(3);
+                    user.release();
                     return caller = 2;//Calls cmd_line()
                 }
                 else
