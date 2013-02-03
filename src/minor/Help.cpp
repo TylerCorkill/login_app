@@ -9,56 +9,56 @@ using namespace std;
 
 //string error(string error);
 
-int help()
+int help(int type)
 {
-//	if (basic)
-//	{
-//		cout << "\n  ================================================="
-//			 << "\n  |     Commands      |        Desctiption        |"
-//			 << "\n  | - - - - - - - - - | - - - - - - - - - - - - - |"
-//			 << "\n  |                   |                           |"
-//			 << "\n  |  help             | displays this information |"
-//			 << "\n  |                   |                           |"
-//			 << "\n  |  logout           | logs out current user     |"
-//			 << "\n  |                   |                           |"
-//			 << "\n  |  quit             | exits this program        |"
-//			 << "\n  |                   |                           |"
-//			 << "\n  |  start PROGRAM    | starts external PROGRAM   |"
-//			 << "\n  |                   |                           |"
-//			 << "\n  |  stop PROGRAM     | quits external PROGRAM    |"
-//			 << "\n  |                   |                           |"
-//			 << "\n  | - - - - - - - - - | - - - - - - - - - - - - - |"
-//			 << "\n  ================================================="
-//			 << endl;
-//	}
-//	else if (power)
-//	{
-//		cout << "\n  ================================================="
-//			 << "\n  |     Commands      |        Desctiption        |"
-//			 << "\n  | - - - - - - - - - | - - - - - - - - - - - - - |"
-//			 << "\n  |                   |                           |"
-//			 << "\n  |  help             |  Displays this box        |"
-//			 << "\n  |                   |                           |"
-//			 << "\n  |  logout           |  Logs out current user    |"
-//			 << "\n  |                   |                           |"
-//			 << "\n  |  quit             |  Exits this program       |"
-//			 << "\n  |                   |                           |"
-//			 << "\n  |  start PROGRAM    |  Starts external PROGRAM  |"
-//			 << "\n  |                   |                           |"
-//			 << "\n  |  stop PROGRAM     |  Quits external PROGRAM   |"
-//			 << "\n  |                   |                           |"
-//			 << "\n  |  sys COMMAND      |  Enters system COMMAND    |"
-//			 << "\n  |                   |                           |"
-//			 << "\n  |  basic USER       |  Makes USER an admin      |"
-//			 << "\n  |                   |                           |"
-//			 << "\n  |  power USER       |  Makes USER a power type  |"
-//			 << "\n  |                   |                           |"
-//			 << "\n  | - - - - - - - - - | - - - - - - - - - - - - - |"
-//			 << "\n  ================================================="
-//			 << endl;
-//	}
-//	else if (admin)
-//	{
+	if (type == 1)
+	{
+		cout << "\n  ================================================="
+			 << "\n  |     Commands      |        Desctiption        |"
+			 << "\n  | - - - - - - - - - | - - - - - - - - - - - - - |"
+			 << "\n  |                   |                           |"
+			 << "\n  |  help             | displays this information |"
+			 << "\n  |                   |                           |"
+			 << "\n  |  logout           | logs out current user     |"
+			 << "\n  |                   |                           |"
+			 << "\n  |  quit             | exits this program        |"
+			 << "\n  |                   |                           |"
+			 << "\n  |  start PROGRAM    | starts external PROGRAM   |"
+			 << "\n  |                   |                           |"
+			 << "\n  |  stop PROGRAM     | quits external PROGRAM    |"
+			 << "\n  |                   |                           |"
+			 << "\n  | - - - - - - - - - | - - - - - - - - - - - - - |"
+			 << "\n  ================================================="
+			 << endl;
+	}
+	else if (type == 2)
+	{
+		cout << "\n  ================================================="
+			 << "\n  |     Commands      |        Desctiption        |"
+			 << "\n  | - - - - - - - - - | - - - - - - - - - - - - - |"
+			 << "\n  |                   |                           |"
+			 << "\n  |  help             |  Displays this box        |"
+			 << "\n  |                   |                           |"
+			 << "\n  |  logout           |  Logs out current user    |"
+			 << "\n  |                   |                           |"
+			 << "\n  |  quit             |  Exits this program       |"
+			 << "\n  |                   |                           |"
+			 << "\n  |  start PROGRAM    |  Starts external PROGRAM  |"
+			 << "\n  |                   |                           |"
+			 << "\n  |  stop PROGRAM     |  Quits external PROGRAM   |"
+			 << "\n  |                   |                           |"
+			 << "\n  |  sys COMMAND      |  Enters system COMMAND    |"
+			 << "\n  |                   |                           |"
+			 << "\n  |  basic USER       |  Makes USER an admin      |"
+			 << "\n  |                   |                           |"
+			 << "\n  |  power USER       |  Makes USER a power type  |"
+			 << "\n  |                   |                           |"
+			 << "\n  | - - - - - - - - - | - - - - - - - - - - - - - |"
+			 << "\n  ================================================="
+			 << endl;
+	}
+	else if (type == 3)
+	{
 		cout << "\n  ============================================================="
 			 << "\n  |     Commands      |              Desctiption              |"
 			 << "\n  | - - - - - - - - - | - - - - - - - - - - - - - - - - - - - |"
@@ -88,9 +88,5 @@ int help()
 			 << "\n  | - - - - - - - - - | - - - - - - - - - - - - - - - - - - - |"
 			 << "\n  ============================================================="
 			 << endl;
-//	}
-//	else
-//	{
-//		cerr << error("typeUnknown");
-//	}
+	}
 }

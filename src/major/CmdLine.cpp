@@ -5,65 +5,65 @@
 #include <stdlib.h>
 
 #include "include/User.h"
-//#include "include/Error.h"
+//#include "include/exUser.h"
 
 using namespace std;
 
 extern int caller;      // Variable for switch(caller) in main()
-
-//User::User(string newName, string newPass, int newType);
-//User::User();
-//extern string user;     // Username input string
-//extern string pass;     // Password input string
-//extern bool basic;      // Basic value
-//extern bool power;      // Power value
-//extern bool admin;      // Admin value
-
 extern User user;
 
-//string error(string error);
-
-int help();
-int start(string prgm);
-int stop(string sPrgm);
+int help(int type);
 int add(int i1, int i2);
 int wipe_ulib();
-//int make(string userNew, int type);
-//int change_pass(string uName);
+int start(string prgm);
+int stop(string sPrgm);
 int minecraft(string mUser, string mPass);
-
-//void class_test();
 
 int cmd_line()
 {
     string cmd;
     cout << "\nEnter Command: ";
     cin >> cmd;
-    if (cmd == "help")
+
+    
+    if (cmd == "quit")
     {
-        help();
-        return caller = 2;//Calls cmd_line()
+        cout << "\n> Exiting program...\n";
+        return caller = 0;//Breaks
     }
     else if (cmd == "logout")
     {
         cout << "\n> Logging out..."
              << endl;
-        //basic = false;
-        //power = false;
-        //admin = false;
         cout << "\n> "
              << user.name()
              << " logged out"
              << endl;
+        user.reset();
         return caller = 1;//Calls login()
     }
-    else if (cmd == "quit")
-    {
-        cout << "\n> Exiting program...\n";
-        return caller = 0;//Breaks
-    }
+    //else if (cmd == "test")
+    //{
+        //user.hold();
+        //cout << user.name() << endl;
+        //string name2, pass2;
+        //cout << "Test name: ";
+        //cin >> name2;
+        //cout << "Test pass: ";
+        //cin >> pass2;
+        //user.new_name(name2);
+        //user.new_pass(pass2);
+        //user.new_type(1);
+        //cout << user.name() << user.pass() << user.type() << endl;
+        //user.release();
+    //}
     else if (user.type() == 1 || 2 || 3)                // Basic, Power, and Admin
     {
+        if (cmd == "help")
+        {
+            help(user.type());
+            return caller = 2;//Calls cmd_line()
+        }
         if (cmd == "start")
         {
             string program;
@@ -149,7 +149,6 @@ int cmd_line()
                     user.release();
                     return caller = 2;//Calls cmd_line()
                 }
-                //else if (cmd == "class-test") class_test();
                 else if (cmd == "admin")
                 {
                     string username;

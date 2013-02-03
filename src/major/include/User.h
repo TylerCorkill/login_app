@@ -34,15 +34,15 @@ public:
 //	}
 
 
-	string new_name(string newName)
+	void new_name(string newName)
 	{
 		trueName = newName;
 	}
-	string new_pass(string newPass)
+	void new_pass(string newPass)
 	{
 		truePass = newPass;
 	}
-	int new_type(int newType)
+	void new_type(int newType)
 	{
 		trueType = newType;
 	}
@@ -66,17 +66,34 @@ public:
 	}
 
 
-	int hold()
+    void reset()
+    {
+        cout << "\n1-true: " << trueName << truePass << trueType << "\n1-hold: " << holdName << holdPass << holdType << endl;
+        trueName = "";
+        truePass = "";
+        trueType = 0;
+        holdName = "";
+        holdPass = "";
+        holdType = 0;
+        cout << "2-true: " << trueName << truePass << trueType << "\n2-hold: " << holdName << holdPass << holdType << endl;
+    }
+
+
+	void hold()
 	{
+        cout << "\n1h-true: " << trueName << truePass << trueType << "\n1h-hold: " << holdName << holdPass << holdType << endl;
 		holdName = trueName;
 		holdPass = truePass;
 		holdType = trueType;
+        cout << "2h-true: " << trueName << truePass << trueType << "\n2h-hold: " << holdName << holdPass << holdType << endl;
 	}
-	int release()
+	void release()
 	{
+        cout << "1r-true: " << trueName << truePass << trueType << "\n1r-hold: " << holdName << holdPass << holdType << endl;
 		trueName = holdName;
 		truePass = holdPass;
 		trueType = holdType;
+        cout << "2r-true: " << trueName << truePass << trueType << "\n2r-hold: " << holdName << holdPass << holdType << endl;
 	}
 
 
@@ -108,7 +125,7 @@ public:
 
 	int create_entry()                                   //Creates basic user
 	{
-    	fstream userLib;
+    	ofstream userLib;
     	userLib.open("lib/ulib", fstream::app);
     	//make_hash(user);
     	userLib << hash(1)		// name
@@ -125,6 +142,7 @@ public:
 
 	int check()
 	{
+        hold();
     	nameTaken = false; 
     	int colon, exPoint;
     	string holdUser, 
@@ -147,33 +165,61 @@ public:
             	{	
 	                //make_hash(chkPass.substr(1, 3));            //Basic password hash section
 	                trueType = 1;
-                	if (hash(3) == chkType) return 1;
+                	if (hash(3) == chkType)
+                    {
+                        release();
+                        userLib.close();
+                        return 1;
+                    }
                 	else
                 	{
 	                    //make_hash(chkPass.substr(2, 3));        //Power password hash section
 	                    trueType = 2;
-                    	if (hash(3) == chkType) return 2;
+                    	if (hash(3) == chkType)
+                        {
+                            release();
+                            userLib.close();
+                            return 2;
+                        }
                     	else
                     	{
 	                        //make_hash(chkPass.substr(3, 3));    //Admin password hash section
 	                        trueType = 3;
-                        	if (hash(3) == chkType) return 3;
-                        	else return 0;
+                        	if (hash(3) == chkType)
+                            {
+                                release();
+                                userLib.close();
+                                return 3;
+                            }
+                        	else
+                            {
+                                release();
+                                userLib.close();
+                                return 0;
+                            }
                     	}
                 	}
             	}
-            	else return 0;
+            	else
+                {
+                    release();
+                    userLib.close();
+                    return 0;
+                }
         	}            
     	}
+        release();
     	userLib.close();
+        return 0;
 	}
 
 
 	int make(int newType)                  //Makes user specified type; 1, 2, or 3
 	{
+        //hold();
     	bool success = false;
     	string holdUser,
-    		   chkUser, chkPass, chkType;
+    		   chkUser, chkPass, chkType, chkPassIn;
     	int colon, exPoint;
 
     	fstream userLib;
@@ -189,15 +235,20 @@ public:
         	chkType = holdUser.substr(exPoint + 1, holdUser.length() - (exPoint + 1));
         	if (hash(1) == chkUser)
         	{
-        		truePass = chkPass;
-        		trueType = newType;
-
-            	userLib.seekp(inputLoc - (holdUser.length() - exPoint));
-            	userLib << hash(3);
-            	success = true;
+                cin >> chkPassIn;
+                truePass = chkPassIn;
+                if (hash(2) == chkPass)
+                {
+                    trueType = newType;
+                    userLib.seekp(inputLoc - (holdUser.length() - exPoint));
+                    userLib << hash(3);
+                    success = true;
+                }
+                else cerr << error("passMismatch");
         	}
     	}
     	userLib.close();
+
 	    if (success)
     	{
     	    if (trueType == 1)          // Basic success
@@ -224,6 +275,7 @@ public:
         	else cerr << error("typeError");
     	}
     	else cerr << error("typeChange");
+        //release();
 	}
 
 
@@ -305,47 +357,6 @@ public:
              	 << endl;
     	}
 	}
-
-
-//	unsigned int name_hash()
-//	{                                    //APHash, algorithim by Arash Partow
-//	    unsigned int hash = 0xAAAAAAAA;
-//	    for (int i = 0; i < trueName.length(); i++)
-//	    {
-//	        hash ^= ((i & 1) == 0) ?
-//    	            ((hash << 7) ^ trueName[i] * (hash >> 3)) :
-//        	        (~((hash << 11) + (trueName[i] ^ (hash >> 5))));
-//    	}                                //End APHash algorithim
-//    	return hash;
-//	}
-//	unsigned int pass_hash()
-//	{                                    //APHash, algorithim by Arash Partow
-//	    unsigned int hash = 0xAAAAAAAA;
-//	    for (int i = 0; i < truePass.length(); i++)
-//	    {
-//	        hash ^= ((i & 1) == 0) ?
-//    	            ((hash << 7) ^ truePass[i] * (hash >> 3)) :
-//        	        (~((hash << 11) + (truePass[i] ^ (hash >> 5))));
-//    	}                                //End APHash algorithim
-//    	return hash;
-//	}
-//	unsigned int type_hash()
-//	{                                    //APHash, algorithim by Arash Partow
-//		stringstream hashOut;
-//		hashOut << pass_hash();
-//		string passHash = hashOut.str();
-//
-//	    unsigned int hash = 0xAAAAAAAA;
-//	    for (int i = 0; i < passHash.substr(trueType, 3).length(); i++)
-//	    {
-//	        hash ^= ((i & 1) == 0) ?
-//    	            ((hash << 7) ^ passHash.substr(trueType, 3)[i] * (hash >> 3)) :
-//        	        (~((hash << 11) + (passHash.substr(trueType, 3)[i] ^ (hash >> 5))));
-//    	}                                //End APHash algorithim
-//    	return hash;
-//	}
-
-
 };
 
 #endif
