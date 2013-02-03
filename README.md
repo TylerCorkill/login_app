@@ -24,8 +24,15 @@ But what's included is as follows:
   * Change user passwords
 * And ofcourse a system for displaying errors
 
-### Default Admin
-Username/Password: admin/pass
+### Default Accounts
+##### Username/Password
+
+basic/pass
+
+power/pass
+
+admin/pass
+
 
 
 ## Compiling
