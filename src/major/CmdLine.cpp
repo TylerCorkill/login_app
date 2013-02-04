@@ -82,6 +82,16 @@ int cmd_line()
         {
             int x1, x2;
             cin >> x1 >> x2;
+            while (!(cin >> x1))
+            {
+                num_check();
+                return caller = 2;//Calls cmd_line()
+            }
+            while (!(cin >> x2))
+            {
+                num_check();
+                return caller = 2;//Calls cmd_line()
+            }
             cout << "\n> "
                  << x1
                  << " + "
