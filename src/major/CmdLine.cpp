@@ -14,6 +14,7 @@ extern User user;
 
 int help(int type);
 int add(int i1, int i2);
+int num_check();
 int wipe_ulib();
 int start(string prgm);
 int stop(string sPrgm);
