@@ -300,14 +300,25 @@ public:
 	int pass_change()
 	{
 	    int colon, exPoint;
+        int line = 0;
     	bool success = false;
     	bool noUserEntry = true;
+        string holdUser,
+               chkUser, chkPass, chkType;
+        char holdChar;
     	fstream userLib;
     	userLib.open("lib/ulib");
-    	string holdUser,
-    		   chkUser, chkPass, chkType;
+        while(true)
+        {
+            if (userLib.peek() == -1) break;
+            holdChar = userLib.get();
+            if (holdChar == '\n') ++line;
+        }
+        //cout << line << endl;
+        userLib.seekg(0, ios::beg);
     	while (userLib >> holdUser)
     	{
+            --line;
 	        int inputLoc = userLib.tellg();
         	colon = holdUser.find(':');
         	exPoint = holdUser.find('!');
@@ -342,17 +353,52 @@ public:
                     	cin >> nPass;
                     	cout << "Confirm Password: ";
                     	cin >> nPassChk;
+                        truePass = nPass;
                     	if (nPass == nPassChk)
                     	{
 	                        cout << "\n> Changing "
                              	 << trueName
                              	 << "'s password..."
-                             	 << endl;
+                                 << endl;
                         	new_pass(nPass);
-                        	userLib.seekp(inputLoc - (holdUser.length() - colon));
-                        	userLib << hash(2);
-                        	userLib.seekp(inputLoc - (holdUser.length() - exPoint));
-                        	userLib << hash(3);
+                        	userLib.seekp(inputLoc - (holdUser.length() - colon + line));
+                            if ((hash(2).length() + hash(3).length()) > (chkPass.length() + chkType.length()))
+                            {
+                                cout << "1" << endl;
+                                userLib << hash(2)
+                                        << "!"
+                                        << hash(3)
+                                        << "\n";
+                            }
+                            else if ((chkPass.length() + chkType.length()) > (hash(2).length() + hash(3).length()))
+                            {
+                                int location = userLib.tellp();
+                                userLib.seekp(location + (holdUser.length() - colon));
+                                int x = 0;
+                                while(true)
+                                {
+                                    holdChar = userLib.get();
+                                    if (holdChar == '\n') break;
+                                    else ++x;
+                                }
+                                string space;
+                                for (int i = 0; i <= x; i++)
+                                {
+                                    space += " ";
+                                }
+                                userLib.seekp(location);
+                                cout << "2" << endl;
+                                userLib << hash(2)
+                                        << "!"
+                                        << hash(3)
+                                        << space;
+                            }
+                            else
+                            {
+                                userLib << hash(2)
+                                        << "!"
+                                        << hash(3);
+                            }
                         	success = true;
                     	}
                     	else cerr << error("passMismatch");
