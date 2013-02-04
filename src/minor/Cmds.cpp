@@ -32,6 +32,14 @@ int wipe_ulib()
 	userLib.close();
 }
 
+int num_check()
+{
+	cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "\n> Numbers only"
+             << endl;
+}
+
 //unsigned int make_hash(string hashIn)
 //{                                    //APHash, algorithim by Arash Partow
     //unsigned int hash = 0xAAAAAAAA;
