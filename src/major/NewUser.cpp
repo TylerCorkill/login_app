@@ -2,6 +2,7 @@
 #include <string>
 #include <sstream>
 #include <fstream>
+#include <cstdlib>
 
 #include "include/User.h"
 //#include "include/exUser.h"

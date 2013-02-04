@@ -2,6 +2,7 @@
 #include <string>
 #include <sstream>
 #include <fstream>
+#include <cstdlib>
 
 #include "include/User.h"
 
@@ -24,6 +25,10 @@ int login()
         return caller = 3;//Calls new_user()
     }
     //else if (user == "break") return caller = 0;
+    else if (name == "quit")
+    {
+        return caller = 0;//Breaks
+    }
     else
     {
         cout << "\nPassword: ";
@@ -41,20 +46,20 @@ int login()
         }
         else if (user.check() == 2)            //Power user login
         {
-            cout << "\n> Logged in power "
+            cout << "\n> Logged in power, "
                  << user.name()
                  << endl;
             user.new_type(2);
-            cout << user.type();
+            //cout << user.type();
             return caller = 2;//Calls cmd_line()
         }
         else if (user.check() == 3)            //Admin user login
         {
-            cout << "\n> Logged in admin "
+            cout << "\n> Logged in admin, "
                  << user.name()
                  << endl;
             user.new_type(3);
-            cout << user.type();
+            //cout << user.type();
             return caller = 2;//Calls cmd_line()
         }
         else
