@@ -2,6 +2,7 @@
 #include <string>
 #include <sstream>
 #include <fstream>
+#include <limits>
 #include <stdlib.h>
 
 #include "include/User.h"
@@ -82,15 +83,21 @@ int cmd_line()
         else if (cmd == "add")
         {
             int x1, x2;
-            cin >> x1 >> x2;
+            //cin >> x1 >> x2;
             while (!(cin >> x1))
             {
-                num_check();
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "\n> Numbers only"
+                     << endl;
                 return caller = 2;//Calls cmd_line()
             }
             while (!(cin >> x2))
             {
-                num_check();
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "\n> Numbers only"
+                     << endl;
                 return caller = 2;//Calls cmd_line()
             }
             cout << "\n> "
