@@ -15,6 +15,7 @@ extern User user;
 
 int help(int type);
 int add(int i1, int i2);
+int sub(int i1, int i2);
 int num_check();
 int wipe_ulib();
 int start(string prgm);
@@ -108,6 +109,34 @@ int cmd_line()
                  << add(x1, x2)
                  << endl;
             return caller = 2;//Calls cmd_line()
+        }
+        else if (cmd == "sub")
+        {
+            int x1, x2;
+            while (!(cin >> x1))
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "\n> Numbers only"
+                     << endl;
+                return caller = 2;//Calls cmd_line()
+            }
+            while (!(cin >> x2))
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "\n> Numbers only"
+                     << endl;
+                return caller = 2;//Calls cmd_line()
+            }
+            cout << "\n> "
+                 << x1
+                 << " - "
+                 << x2
+                 << " = "
+                 << sub(x1, x2)
+                 << endl;
+            return caller = 2;
         }
         else if (user.type() == 2 || 3)                 // Power and Admin
         {
